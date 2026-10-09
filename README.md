@@ -31,6 +31,32 @@ Peripheral blood mononuclear cells from one healthy donor, released publicly by 
 
 Cluster numbers depend on the software versions and may differ on a re-run.
 
+## Figures
+
+**Quality control** (genes per cell, counts per cell, mitochondrial percentage)
+
+![QC violin plots](figures/01_qc_violin.png)
+
+**Highly variable genes**
+
+![Highly variable genes](figures/02_highly_variable_genes.png)
+
+**PCA variance explained**
+
+![PCA variance ratio](figures/03_pca_variance.png)
+
+**UMAP coloured by Leiden cluster**
+
+![UMAP with Leiden clusters](figures/04_umap_leiden.png)
+
+**UMAP coloured by known marker genes**
+
+![UMAP marker genes](figures/05_umap_markers.png)
+
+**Top marker genes per cluster** (Wilcoxon, cluster vs rest)
+
+![Cluster marker genes](figures/06_cluster_marker_genes.png)
+
 ## Limitations
 
 - One donor, so no batch integration and no comparison between conditions.
