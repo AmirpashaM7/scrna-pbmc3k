@@ -57,6 +57,29 @@ Cluster numbers depend on the software versions and may differ on a re-run.
 
 ![Cluster marker genes](figures/06_cluster_marker_genes.png)
 
+## Part 2: cell-type classifier in PyTorch
+
+At the end of `pbmc3k.ipynb`, the Leiden cluster labels are used to train models that predict a cell's cluster from its expression of the 2,000 highly variable genes.
+
+- **Data split:** 2,110 cells for training, 528 held out for testing (80/20, stratified by cluster, `random_state=0`).
+- **Baseline:** logistic regression (scikit-learn, default settings, `max_iter=1000`).
+- **Model B:** feed-forward neural network in PyTorch: 2,000 inputs, one hidden layer of 64 units with ReLU, 9 outputs; cross-entropy loss, Adam optimizer (learning rate 0.001), 100 full-batch epochs.
+- **Model C:** the same network with dropout (0.5) and weight decay (0.001) to reduce overfitting.
+
+| Model | Training accuracy | Test accuracy |
+|---|---|---|
+| Logistic regression (baseline) | not measured | 92.4% |
+| Neural network (B) | 100% | 85.8% |
+| Neural network with dropout and weight decay (C) | 100% | 87.5% |
+
+Both networks overfitted (perfect training accuracy, lower test accuracy). Regularization helped slightly, but the simple baseline remained the best model for this small dataset.
+
+Caveats: the labels are clusters computed from the same data, so the task partly reproduces the clustering rather than testing biological knowledge. The comparison rests on a single train/test split; cross-validation would give a more reliable estimate.
+
+PyTorch (CPU build) was installed separately:
+
+    .\sc\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+
 ## Limitations
 
 - One donor, so no batch integration and no comparison between conditions.
