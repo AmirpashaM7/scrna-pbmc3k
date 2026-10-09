@@ -1,0 +1,5 @@
+sc/
+data/
+*.h5ad
+.ipynb_checkpoints/
+__pycache__/
